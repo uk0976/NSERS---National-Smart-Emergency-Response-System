@@ -1,0 +1,5 @@
+# Temporary MS Office lock files
+~$*
+# OS junk
+.DS_Store
+Thumbs.db

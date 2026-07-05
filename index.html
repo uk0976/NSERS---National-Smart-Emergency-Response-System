@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NSERS – National Smart Emergency Response System</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-theme="light">
+  
+  <div class="app-container">
+    
+    <!-- TOP NAVIGATION BAR -->
+    <header class="top-nav">
+      <div class="brand-section">
+        <div class="brand-logo">
+          <span class="material-icons-round">emergency</span>
+        </div>
+        <div class="brand-name-wrapper">
+          <h1 class="brand-name">NSERS</h1>
+          <span class="brand-subtitle">Govt. of India Platform</span>
+        </div>
+      </div>
+
+      <div class="search-bar-wrapper">
+        <span class="material-icons-round" style="color: var(--text-light)">search</span>
+        <input type="text" placeholder="Search incidents, hospitals, guidelines...">
+      </div>
+
+      <div class="nav-actions">
+        <!-- Interactive Role Badge Switcher -->
+        <div class="role-badge-picker" id="role-badge-picker">
+          <span class="material-icons-round" style="margin-right: 4px; font-size: 16px;">admin_panel_settings</span>
+          <span id="current-role-label">CITIZEN PORTAL</span>
+        </div>
+
+        <button class="nav-btn" data-target="settings-page" title="Settings">
+          <span class="material-icons-round">settings</span>
+        </button>
+
+        <button class="nav-btn" title="Notifications" onclick="alert('System Notifications:\n- Red Alert: Cyclone Warning issued for Odisha Coast.\n- Dispatch Complete: Accident INC-8891 assigned.')">
+          <span class="material-icons-round">notifications</span>
+          <span class="notification-badge"></span>
+        </button>
+
+        <div class="profile-avatar" data-target="profile-page" title="Profile Details">
+          <span>UK</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="main-wrapper">
+      
+      <!-- SIDEBAR NAVIGATION MENU -->
+      <aside class="sidebar" id="app-sidebar">
+        <ul class="sidebar-menu">
+          
+          <!-- Shared/Citizen Navigation Links -->
+          <li class="sidebar-item active">
+            <a href="#" data-target="landing-page">
+              <span class="material-icons-round">home</span>
+              <span>Home Portal</span>
+            </a>
+          </li>
+
+          <li class="sidebar-item">
+            <a href="#" data-target="login-signup-page">
+              <span class="material-icons-round">vpn_key</span>
+              <span>Login & Signup</span>
+            </a>
+          </li>
+
+          <!-- Citizen Portal Menu -->
+          <li class="sidebar-citizen-only sidebar-item">
+            <a href="#" data-target="citizen-dashboard">
+              <span class="material-icons-round">dashboard</span>
+              <span>Citizen Dashboard</span>
+            </a>
+          </li>
+          <li class="sidebar-citizen-only sidebar-item">
+            <a href="#" data-target="report-emergency-page">
+              <span class="material-icons-round">add_alert</span>
+              <span>Report Emergency</span>
+            </a>
+          </li>
+          <li class="sidebar-citizen-only sidebar-item">
+            <a href="#" data-target="live-tracking-page">
+              <span class="material-icons-round">track_changes</span>
+              <span>Live SOS Tracker</span>
+            </a>
+          </li>
+          <li class="sidebar-citizen-only sidebar-item">
+            <a href="#" data-target="hazard-report-page">
+              <span class="material-icons-round">report_problem</span>
+              <span>Preventive Reports</span>
+            </a>
+          </li>
+          <li class="sidebar-citizen-only sidebar-item">
+            <a href="#" data-target="emergency-sos-page" style="color: var(--danger-color); font-weight: 600;">
+              <span class="material-icons-round" style="color: var(--danger-color);">radar</span>
+              <span>EMERGENCY SOS</span>
+            </a>
+          </li>
+
+          <!-- Authority Control Menu -->
+          <li class="sidebar-authority-only sidebar-item" style="display: none;">
+            <a href="#" data-target="authority-dashboard">
+              <span class="material-icons-round">dashboard_customize</span>
+              <span>Control Dashboard</span>
+            </a>
+          </li>
+          <li class="sidebar-authority-only sidebar-item" style="display: none;">
+            <a href="#" data-target="resource-management-page">
+              <span class="material-icons-round">local_shipping</span>
+              <span>Resources (NDRF)</span>
+            </a>
+          </li>
+          <li class="sidebar-authority-only sidebar-item" style="display: none;">
+            <a href="#" data-target="analytics-page">
+              <span class="material-icons-round">analytics</span>
+              <span>National Analytics</span>
+            </a>
+          </li>
+
+          <!-- Admin Menu -->
+          <li class="sidebar-admin-only sidebar-item" style="display: none;">
+            <a href="#" data-target="admin-panel">
+              <span class="material-icons-round">settings_applications</span>
+              <span>Admin Console</span>
+            </a>
+          </li>
+
+          <!-- Generic Pages -->
+          <li class="sidebar-item">
+            <a href="#" data-target="profile-page">
+              <span class="material-icons-round">account_circle</span>
+              <span>My Profile</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a href="#" data-target="settings-page">
+              <span class="material-icons-round">tune</span>
+              <span>Preferences</span>
+            </a>
+          </li>
+
+        </ul>
+      </aside>
+
+      <!-- CONTENT PANELS FRAMEWORK -->
+      <main class="content-panel" id="content-panel">
+
+        <!-- ================= PAGE 1: LANDING PAGE ================= -->
+        <section class="screen-container anim-fade-in" id="landing-page">
+          <div class="landing-hero">
+            <div>
+              <span class="hero-tagline">NATIONAL DIGITAL SECURITY</span>
+              <h2 class="hero-title">One Platform. One Alert. One Mission.</h2>
+              <p class="hero-subtitle">Report emergencies instantly, connect with the nearest authorities, and enable AI-powered disaster response across India.</p>
+              <div class="hero-buttons">
+                <button class="btn btn-danger" data-target="emergency-sos-page">
+                  <span class="material-icons-round">emergency</span> Emergency SOS
+                </button>
+                <button class="btn btn-primary" data-target="report-emergency-page">
+                  <span class="material-icons-round">add_alert</span> Report Emergency
+                </button>
+                <button class="btn btn-secondary" onclick="alert('NSERS uses state-of-the-art satellite analysis and Google Maps coordinate tracking to dispatch emergency units.')">
+                  Learn More
+                </button>
+              </div>
+            </div>
+            <div class="india-map-container">
+              <canvas id="hero-live-map" class="live-map-canvas"></canvas>
+              <div style="position: absolute; bottom: 12px; right: 12px; background: rgba(0,0,0,0.6); color: white; padding: 4px 10px; border-radius: 4px; font-size: 11px;">Active Incident Radar (Live Simulator)</div>
+            </div>
+          </div>
+
+          <!-- Quick Call Emergency Helplines Board -->
+          <div class="helpline-board-section" style="margin-top: 40px; margin-bottom: 20px;">
+            <div class="section-header" style="margin-bottom: 24px; text-align: left;">
+              <h2 class="section-title" style="font-size: 24px;">One-Click Emergency Hotline Directory</h2>
+              <p class="section-subtitle" style="font-size: 13px; margin: 4px 0 0 0;">Click to immediately trigger a direct call line to national emergency authorities.</p>
+            </div>
+            
+            <div class="helpline-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px;">
+              
+              <!-- 112 Unified Emergency -->
+              <a href="tel:112" class="helpline-call-card premium-card glow-danger" style="display: flex; align-items: center; gap: 16px; text-decoration: none; padding: 16px; border-color: rgba(234, 67, 53, 0.4); background-color: var(--danger-light);">
+                <div class="helpline-icon-circle" style="width: 44px; height: 44px; border-radius: 50%; background-color: var(--danger-color); color: white; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                  <span class="material-icons-round" style="font-size: 24px;">phone_in_talk</span>
+                </div>
+                <div style="display: flex; flex-direction: column;">
+                  <span style="font-size: 20px; font-weight: 800; color: var(--danger-color); font-family: var(--font-title); line-height: 1.1;">112</span>
+                  <span style="font-size: 11px; font-weight: 700; color: var(--text-primary); text-transform: uppercase; margin-top: 2px;">Unified Emergency</span>
+                </div>
+              </a>
+
+              <!-- 100 Police -->
+              <a href="tel:100" class="helpline-call-card premium-card" style="display: flex; align-items: center; gap: 16px; text-decoration: none; padding: 16px;">
+                <div class="helpline-icon-circle" style="width: 44px; height: 44px; border-radius: 50%; background-color: var(--primary-color); color: white; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                  <span class="material-icons-round" style="font-size: 24px;">local_police</span>
+                </div>
+                <div style="display: flex; flex-direction: column;">
+                  <span style="font-size: 20px; font-weight: 800; color: var(--primary-color); font-family: var(--font-title); line-height: 1.1;">100</span>
+                  <span style="font-size: 11px; font-weight: 700; color: var(--text-primary); text-transform: uppercase; margin-top: 2px;">Police Control</span>
+                </div>
+              </a>
+
+              <!-- 101 Fire Brigade -->
+              <a href="tel:101" class="helpline-call-card premium-card" style="display: flex; align-items: center; gap: 16px; text-decoration: none; padding: 16px;">
+                <div class="helpline-icon-circle" style="width: 44px; height: 44px; border-radius: 50%; background-color: #EF6C00; color: white; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                  <span class="material-icons-round" style="font-size: 24px;">local_fire_department</span>
+                </div>
+                <div style="display: flex; flex-direction: column;">
+                  <span style="font-size: 20px; font-weight: 800; color: #EF6C00; font-family: var(--font-title); line-height: 1.1;">101</span>
+                  <span style="font-size: 11px; font-weight: 700; color: var(--text-primary); text-transform: uppercase; margin-top: 2px;">Fire Brigade</span>
+                </div>
+              </a>
+
+              <!-- 102 Ambulance -->
+              <a href="tel:102" class="helpline-call-card premium-card" style="display: flex; align-items: center; gap: 16px; text-decoration: none; padding: 16px;">
+                <div class="helpline-icon-circle" style="width: 44px; height: 44px; border-radius: 50%; background-color: var(--success-color); color: white; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                  <span class="material-icons-round" style="font-size: 24px;">medical_services</span>
+                </div>
+                <div style="display: flex; flex-direction: column;">
+                  <span style="font-size: 20px; font-weight: 800; color: var(--success-color); font-family: var(--font-title); line-height: 1.1;">102</span>
+                  <span style="font-size: 11px; font-weight: 700; color: var(--text-primary); text-transform: uppercase; margin-top: 2px;">Ambulance / Med</span>
+                </div>
+              </a>
+
+              <!-- 1078 Disaster Management -->
+              <a href="tel:1078" class="helpline-call-card premium-card" style="display: flex; align-items: center; gap: 16px; text-decoration: none; padding: 16px;">
+                <div class="helpline-icon-circle" style="width: 44px; height: 44px; border-radius: 50%; background-color: #7B1FA2; color: white; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                  <span class="material-icons-round" style="font-size: 24px;">groups</span>
+                </div>
+                <div style="display: flex; flex-direction: column;">
+                  <span style="font-size: 20px; font-weight: 800; color: #7B1FA2; font-family: var(--font-title); line-height: 1.1;">1078</span>
+                  <span style="font-size: 11px; font-weight: 700; color: var(--text-primary); text-transform: uppercase; margin-top: 2px;">Disaster Wing</span>
+                </div>
+              </a>
+
+              <!-- 1091 Women Helpline -->
+              <a href="tel:1091" class="helpline-call-card premium-card" style="display: flex; align-items: center; gap: 16px; text-decoration: none; padding: 16px;">
+                <div class="helpline-icon-circle" style="width: 44px; height: 44px; border-radius: 50%; background-color: #EC407A; color: white; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                  <span class="material-icons-round" style="font-size: 24px;">female</span>
+                </div>
+                <div style="display: flex; flex-direction: column;">
+                  <span style="font-size: 20px; font-weight: 800; color: #EC407A; font-family: var(--font-title); line-height: 1.1;">1091</span>
+                  <span style="font-size: 11px; font-weight: 700; color: var(--text-primary); text-transform: uppercase; margin-top: 2px;">Women Helpline</span>
+                </div>
+              </a>
+
+              <!-- 1098 Child Helpline -->
+              <a href="tel:1098" class="helpline-call-card premium-card" style="display: flex; align-items: center; gap: 16px; text-decoration: none; padding: 16px;">
+                <div class="helpline-icon-circle" style="width: 44px; height: 44px; border-radius: 50%; background-color: #0288D1; color: white; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                  <span class="material-icons-round" style="font-size: 24px;">child_care</span>
+                </div>
+                <div style="display: flex; flex-direction: column;">
+                  <span style="font-size: 20px; font-weight: 800; color: #0288D1; font-family: var(--font-title); line-height: 1.1;">1098</span>
+                  <span style="font-size: 11px; font-weight: 700; color: var(--text-primary); text-transform: uppercase; margin-top: 2px;">Child Helpline</span>
+                </div>
+              </a>
+
+            </div>
+          </div>
+
+          <!-- Feature Cards Section -->
+          <div class="features-section">
+            <div class="section-header">
+              <h2 class="section-title">AI-Powered Disaster Operations</h2>
+              <p class="section-subtitle">A state-of-the-art platform ensuring citizen protection, dispatch authentication, and quick responses.</p>
+            </div>
+            <div class="features-grid">
+              <div class="feature-card premium-card">
+                <div class="feature-icon-wrapper"><span class="material-icons-round">psychology</span></div>
+                <h3>AI Verification</h3>
+                <p>Advanced neural networks analyze images, audio distress calls, and description logs to filter fraud alerts.</p>
+              </div>
+              <div class="feature-card premium-card">
+                <div class="feature-icon-wrapper danger"><span class="material-icons-round">gps_fixed</span></div>
+                <h3>Live Tracking</h3>
+                <p>Real-time vehicle telemetry displays response vehicle locations, paths, and arrival metrics.</p>
+              </div>
+              <div class="feature-card premium-card">
+                <div class="feature-icon-wrapper success"><span class="material-icons-round">send</span></div>
+                <h3>Automatic Dispatch</h3>
+                <p>Instantly calculates nearest available ambulance, NDRF, or fire unit routes using traffic forecasts.</p>
+              </div>
+              <div class="feature-card premium-card">
+                <div class="feature-icon-wrapper"><span class="material-icons-round">map</span></div>
+                <h3>Google Maps</h3>
+                <p>Precise mapping integration displaying public hazards, shelters, police, and medical bases.</p>
+              </div>
+              <div class="feature-card premium-card">
+                <div class="feature-icon-wrapper danger"><span class="material-icons-round">bolt</span></div>
+                <h3>Real-time Alerts</h3>
+                <p>Broadcasts cell emergency alerts immediately during cyclonic activities or geological disasters.</p>
+              </div>
+              <div class="feature-card premium-card">
+                <div class="feature-icon-wrapper success"><span class="material-icons-round">shield</span></div>
+                <h3>Disaster Prevention</h3>
+                <p>Allows citizens to log local infrastructure damage to repair hazards before incidents occur.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Statistics Section -->
+          <div class="stats-section">
+            <div class="stat-card premium-card glow-primary">
+              <div class="stat-value">6.2 Mins</div>
+              <div class="stat-label">Avg Response Time</div>
+            </div>
+            <div class="stat-card premium-card">
+              <div class="stat-value">1,402</div>
+              <div class="stat-label">Active Emergency Units</div>
+            </div>
+            <div class="stat-card premium-card">
+              <div class="stat-value danger">24,591</div>
+              <div class="stat-label">Incidents Resolved</div>
+            </div>
+            <div class="stat-card premium-card">
+              <div class="stat-value">85,299</div>
+              <div class="stat-label">Lives Assisted</div>
+            </div>
+          </div>
+
+          <!-- How It Works Section -->
+          <div class="flow-section">
+            <div class="section-header">
+              <h2 class="section-title">Incident Response Pipeline</h2>
+              <p class="section-subtitle">From reporting to resolution, monitored by automated AI models.</p>
+            </div>
+            <div class="flow-steps">
+              <div class="flow-step">
+                <div class="flow-step-circle">1</div>
+                <div class="flow-step-title">Report</div>
+                <div class="flow-step-desc">Citizen submits text, images, or triggers SOS.</div>
+              </div>
+              <div class="flow-step">
+                <div class="flow-step-circle">2</div>
+                <div class="flow-step-title">AI Verifies</div>
+                <div class="flow-step-desc">Neural filters confirm severity and location.</div>
+              </div>
+              <div class="flow-step">
+                <div class="flow-step-circle">3</div>
+                <div class="flow-step-title">Dispatch</div>
+                <div class="flow-step-desc">System assigns optimal department and routes.</div>
+              </div>
+              <div class="flow-step">
+                <div class="flow-step-circle">4</div>
+                <div class="flow-step-title">Respond</div>
+                <div class="flow-step-desc">Authorities travel en route with live map details.</div>
+              </div>
+              <div class="flow-step">
+                <div class="flow-step-circle">5</div>
+                <div class="flow-step-title">Resolved</div>
+                <div class="flow-step-desc">Safety secured. Records logged for audit review.</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ================= PAGE 2: LOGIN & SIGNUP ================= -->
+        <section class="screen-container hidden-screen" id="login-signup-page">
+          <div class="login-container premium-card">
+            <div class="login-header">
+              <h2 class="login-title">Access NSERS Secure Gateway</h2>
+              <p style="color: var(--text-secondary); font-size: 14px;">Select your credentials to log into the emergency response hub.</p>
+            </div>
+
+            <!-- Role Selector -->
+            <div class="form-group">
+              <label>Select User Role Profile</label>
+              <div class="role-selector-grid">
+                
+                <input type="radio" name="role-select" id="role-citizen" value="citizen" checked class="role-card-input">
+                <label for="role-citizen" class="role-card-label">
+                  <span class="material-icons-round">person</span>
+                  <span>Citizen</span>
+                </label>
+
+                <input type="radio" name="role-select" id="role-operator" value="operator" class="role-card-input">
+                <label for="role-operator" class="role-card-label">
+                  <span class="material-icons-round">headset_mic</span>
+                  <span>Operator</span>
+                </label>
+
+                <input type="radio" name="role-select" id="role-police" value="police" class="role-card-input">
+                <label for="role-police" class="role-card-label">
+                  <span class="material-icons-round">policy</span>
+                  <span>Police force</span>
+                </label>
+
+                <input type="radio" name="role-select" id="role-ambulance" value="ambulance" class="role-card-input">
+                <label for="role-ambulance" class="role-card-label">
+                  <span class="material-icons-round">medical_services</span>
+                  <span>Ambulance</span>
+                </label>
+
+                <input type="radio" name="role-select" id="role-fire" value="fire_brigade" class="role-card-input">
+                <label for="role-fire" class="role-card-label">
+                  <span class="material-icons-round">local_fire_department</span>
+                  <span>Fire Brigade</span>
+                </label>
+
+                <input type="radio" name="role-select" id="role-disaster" value="disaster_authority" class="role-card-input">
+                <label for="role-disaster" class="role-card-label">
+                  <span class="material-icons-round">groups</span>
+                  <span>NDRF/SDRF</span>
+                </label>
+
+                <input type="radio" name="role-select" id="role-admin" value="administrator" class="role-card-input">
+                <label for="role-admin" class="role-card-label">
+                  <span class="material-icons-round">admin_panel_settings</span>
+                  <span>Admin</span>
+                </label>
+
+              </div>
+            </div>
+
+            <!-- Inputs -->
+            <form onsubmit="event.preventDefault(); handleSecureLogin();">
+              <div class="form-group">
+                <label for="login-email">Aadhaar Verified ID / Email</label>
+                <input type="text" id="login-email" class="form-input" placeholder="e.g. 5566-7788-9900 or email@domain.gov.in" required>
+              </div>
+
+              <div class="form-group" id="password-group">
+                <label for="login-password">Secret Password Pin</label>
+                <input type="password" id="login-password" class="form-input" placeholder="••••••••" required>
+              </div>
+
+              <div class="form-group">
+                <a href="#" onclick="alert('SMS OTP sent to linked mobile number: +91 ******4521')" style="font-size: 12px; color: var(--primary-color); font-weight: 600; text-align: right; text-decoration: none;">Login via Phone OTP alternative</a>
+              </div>
+
+              <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">
+                Secure Login
+              </button>
+            </form>
+
+            <div class="or-divider">
+              <span>OR CONNECT SECURELY WITH</span>
+            </div>
+
+            <button class="social-login-btn" onclick="alert('Redirecting to secure Single Sign-On (SSO) gateway...')">
+              <span class="material-icons-round">g_translate</span> Login with Google Account
+            </button>
+          </div>
+        </section>
+
+
+        <!-- ================= PAGE 3: CITIZEN DASHBOARD ================= -->
+        <section class="screen-container hidden-screen" id="citizen-dashboard">
+          <div class="dashboard-grid">
+            
+            <div>
+              <!-- Dynamic Weather alerts and Warnings -->
+              <div id="citizen-active-alerts"></div>
+
+              <!-- Safety Tip card -->
+              <div class="premium-card glow-primary" style="margin-bottom: 24px;">
+                <div style="display: flex; gap: 12px;">
+                  <span class="material-icons-round" style="color: var(--primary-color); font-size: 28px;">health_and_safety</span>
+                  <div>
+                    <h3 style="font-weight: 700;">Weather Precaution Protocol</h3>
+                    <p style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">During severe waterlogging, stay indoors and switch off main power switches to avoid electric shock. Do not drive through flooded underpasses.</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Interactive Google Map simulator -->
+              <div class="premium-card">
+                <h3 style="font-weight: 700; margin-bottom: 12px;">My Surrounding Map (Google Maps Integration)</h3>
+                <div class="maps-simulation-box">
+                  <div class="map-toolbar">
+                    <div class="map-control-group">
+                      <button class="map-btn active" onclick="alert('Showing nearby hospitals on simulated map')"><span class="material-icons-round" style="color: var(--danger-color)">local_hospital</span> Hospitals</button>
+                      <button class="map-btn" onclick="alert('Showing nearby fire stations')"><span class="material-icons-round" style="color: var(--warning-color)">local_fire_department</span> Fire Brigade</button>
+                      <button class="map-btn" onclick="alert('Showing nearby police stations')"><span class="material-icons-round" style="color: var(--primary-color)">policy</span> Police</button>
+                    </div>
+                  </div>
+                  <canvas id="citizen-live-map" class="live-map-canvas"></canvas>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick Action & Menu Right Sidebar -->
+            <div>
+              <div class="premium-card">
+                <h3 style="font-weight: 700; margin-bottom: 16px;">Quick Response Actions</h3>
+                <div class="quick-actions-panel">
+                  
+                  <button class="quick-action-btn sos" data-target="emergency-sos-page" title="Toggle Emergency SOS Beacon Mode">
+                    <span class="material-icons-round">radar</span>
+                    <span>SOS Beacon</span>
+                  </button>
+
+                  <button class="quick-action-btn" data-target="report-emergency-page" onclick="document.getElementById('incident-type').value='Road Accident';" title="Report road collision">
+                    <span class="material-icons-round">minor_crash</span>
+                    <span>Road Crash</span>
+                  </button>
+
+                  <button class="quick-action-btn" data-target="report-emergency-page" onclick="document.getElementById('incident-type').value='Fire';" title="Report structural fire">
+                    <span class="material-icons-round">local_fire_department</span>
+                    <span>Fire Alert</span>
+                  </button>
+
+                  <button class="quick-action-btn" data-target="report-emergency-page" onclick="document.getElementById('incident-type').value='Medical';" title="Request ICU ambulance">
+                    <span class="material-icons-round">medical_services</span>
+                    <span>Medical</span>
+                  </button>
+
+                  <button class="quick-action-btn" data-target="report-emergency-page" onclick="document.getElementById('incident-type').value='Crime';" title="Report active crime or theft">
+                    <span class="material-icons-round">shield</span>
+                    <span>Crime Report</span>
+                  </button>
+
+                  <button class="quick-action-btn" data-target="report-emergency-page" onclick="document.getElementById('incident-type').value='Flood';" title="Report water inundation">
+                    <span class="material-icons-round">water</span>
+                    <span>Flood Alert</span>
+                  </button>
+
+                  <button class="quick-action-btn" data-target="report-emergency-page" onclick="document.getElementById('incident-type').value='Earthquake';" title="Report seismic tremors">
+                    <span class="material-icons-round">landslide</span>
+                    <span>Quake Alert</span>
+                  </button>
+
+                  <button class="quick-action-btn" data-target="hazard-report-page" title="Report local infrastructure vulnerabilities">
+                    <span class="material-icons-round">report_problem</span>
+                    <span>Preventive</span>
+                  </button>
+
+                </div>
+
+                <div style="margin-top: 24px; border-top: 1px solid var(--border-color); padding-top: 16px;">
+                  <h4 style="font-weight: 700; margin-bottom: 12px;">Active Operations Assigned to You</h4>
+                  <div style="background-color: var(--bg-primary); padding: 12px; border-radius: var(--border-radius-md); font-size: 13px; cursor: pointer;" data-target="live-tracking-page">
+                    <div style="display: flex; justify-content: space-between; font-weight: 700;">
+                      <span>Incident INC-8891</span>
+                      <span style="color: var(--primary-color)">En Route (6m ETA)</span>
+                    </div>
+                    <p style="color: var(--text-secondary); font-size: 11px; margin-top: 4px;">Ambulance dispatch tracker has been linked to your client dashboard.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+
+        <!-- ================= PAGE 4: REPORT EMERGENCY ================= -->
+        <section class="screen-container hidden-screen" id="report-emergency-page">
+          <div class="premium-card">
+            <h2 style="font-size: 24px; font-weight: 700; margin-bottom: 20px;">Multimodal Incident Reporting System</h2>
+            
+            <form id="emergency-report-form">
+              <div class="report-grid">
+                
+                <div>
+                  <div class="form-group">
+                    <label for="incident-type">Incident Type / Classification</label>
+                    <select id="incident-type" class="form-input" style="width: 100%; height: 46px;" required>
+                      <option value="Road Accident">Road Accident / Highway Collision</option>
+                      <option value="Fire">Fire / Explosion Outbreak</option>
+                      <option value="Medical">Severe Medical Emergency / Heart Attack</option>
+                      <option value="Flood">Flood Inundation / River Overflow</option>
+                      <option value="Earthquake">Earthquake Tremors / Landslide</option>
+                      <option value="Gas Leak">Gas Leak / Toxic Chemical Spill</option>
+                      <option value="Crime">Crime / Theft / Suspicious Activity</option>
+                      <option value="Building Collapse">Building Structural Collapse</option>
+                      <option value="Other">Other Emergency (Describe below)</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="incident-desc">Incident Description (AI parses text for severity keywords)</label>
+                    <textarea id="incident-desc" class="form-input" rows="4" placeholder="Describe what you see. e.g. A bus overturned on the NH-48 highway. Several passengers are bleeding. Smoke is rising from the cabin." required></textarea>
+                  </div>
+
+                  <!-- Severity slider and victim counts -->
+                  <div class="form-group">
+                    <label>Severity Level Estimate</label>
+                    <div class="severity-slider-container">
+                      <input type="range" id="severity-slider" class="severity-slider" min="1" max="100" value="50">
+                      <div class="severity-labels">
+                        <span>LOW</span>
+                        <span>MEDIUM</span>
+                        <span>HIGH</span>
+                        <span>CRITICAL</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="victim-count">Estimated Injured / Victim Count</label>
+                    <input type="number" id="victim-count" class="form-input" min="0" value="1">
+                  </div>
+                </div>
+
+                <!-- Media Uploads & Locations (Right Column) -->
+                <div>
+                  <div class="form-group">
+                    <label>Attach Evidence (Photos / Videos / Voice)</label>
+                    <div class="upload-zone" id="upload-zone">
+                      <span class="material-icons-round">cloud_upload</span>
+                      <p style="font-size: 13px; font-weight: 600;">Drag files here or click to browse</p>
+                      <p style="font-size: 11px; color: var(--text-light)">AI uses photo metadata to run deepfake & reverse-image fraud checks.</p>
+                      <input type="file" id="incident-file" multiple accept="image/*,video/*,audio/*" style="display: none;">
+                    </div>
+
+                    <!-- Interactive Voice Recorder Widget -->
+                    <div class="voice-recorder-widget" style="margin-top: 16px; background-color: var(--bg-primary); border: 1px solid var(--border-color); border-radius: var(--border-radius-md); padding: 16px; display: flex; flex-direction: column; gap: 10px;">
+                      <div style="display: flex; align-items: center; justify-content: space-between;">
+                        <span style="font-size: 12px; font-weight: 700; color: var(--text-primary); display: flex; align-items: center; gap: 6px;">
+                          <span class="material-icons-round" style="color: var(--danger-color); font-size: 18px;">mic</span>
+                          Live Voice Recorder (Acoustic Evidence)
+                        </span>
+                        <span id="record-status-badge" style="font-size: 11px; font-weight: 600; color: var(--text-secondary); display: flex; align-items: center; gap: 6px;">
+                          <span id="record-status-dot" style="width: 8px; height: 8px; border-radius: 50%; background-color: var(--danger-color); display: none;"></span>
+                          <span id="record-status-text">Idle</span>
+                        </span>
+                      </div>
+                      
+                      <!-- Audio Wave Simulation (Pulsing during record) -->
+                      <div id="voice-wave-container" class="voice-wave-wrapper" style="height: 36px; display: none; align-items: center; justify-content: center; gap: 3px; background-color: rgba(234, 67, 53, 0.05); border-radius: var(--border-radius-sm); border: 1px dashed rgba(234, 67, 53, 0.2); overflow: hidden;">
+                        <div class="wave-bar" style="width: 3px; height: 12px; background-color: var(--danger-color); border-radius: 2px;"></div>
+                        <div class="wave-bar" style="width: 3px; height: 22px; background-color: var(--danger-color); border-radius: 2px;"></div>
+                        <div class="wave-bar" style="width: 3px; height: 8px; background-color: var(--danger-color); border-radius: 2px;"></div>
+                        <div class="wave-bar" style="width: 3px; height: 18px; background-color: var(--danger-color); border-radius: 2px;"></div>
+                        <div class="wave-bar" style="width: 3px; height: 28px; background-color: var(--danger-color); border-radius: 2px;"></div>
+                        <div class="wave-bar" style="width: 3px; height: 14px; background-color: var(--danger-color); border-radius: 2px;"></div>
+                        <div class="wave-bar" style="width: 3px; height: 24px; background-color: var(--danger-color); border-radius: 2px;"></div>
+                        <div class="wave-bar" style="width: 3px; height: 10px; background-color: var(--danger-color); border-radius: 2px;"></div>
+                        <div class="wave-bar" style="width: 3px; height: 20px; background-color: var(--danger-color); border-radius: 2px;"></div>
+                        <div class="wave-bar" style="width: 3px; height: 12px; background-color: var(--danger-color); border-radius: 2px;"></div>
+                      </div>
+
+                      <!-- Control Actions -->
+                      <div style="display: flex; gap: 8px;">
+                        <button type="button" id="btn-start-record" class="btn btn-secondary" onclick="toggleAudioRecording()" style="flex: 1; padding: 8px 12px; font-size: 12px; display: flex; align-items: center; justify-content: center; gap: 6px;">
+                          <span class="material-icons-round" style="font-size: 16px; color: var(--danger-color)">fiber_manual_record</span> Record Voice
+                        </button>
+                        <button type="button" id="btn-stop-record" class="btn btn-secondary" onclick="stopAudioRecording()" disabled style="flex: 1; padding: 8px 12px; font-size: 12px; display: flex; align-items: center; justify-content: center; gap: 6px; opacity: 0.5; cursor: not-allowed;">
+                          <span class="material-icons-round" style="font-size: 16px;">stop</span> Stop & Attach
+                        </button>
+                      </div>
+
+                      <!-- Attached Audio Player (hidden initially) -->
+                      <div id="attached-audio-container" style="display: none; margin-top: 4px; border-top: 1px solid var(--border-color); padding-top: 8px;">
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                          <span style="font-size: 11px; font-weight: 600; color: var(--text-secondary);">Recorded Audio Clip:</span>
+                          <button type="button" onclick="deleteAudioRecording()" style="background: none; border: none; color: var(--danger-color); cursor: pointer; display: flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 700; padding: 2px 6px; border-radius: 4px; transition: var(--transition-fast);">
+                            <span class="material-icons-round" style="font-size: 14px;">delete</span> Delete Recording
+                          </button>
+                        </div>
+                        <audio id="recorded-audio-playback" controls style="width: 100%; height: 32px; border-radius: 4px;"></audio>
+                      </div>
+                    </div>
+
+                    <div class="upload-preview-container" id="upload-preview-box">
+                      <!-- JS dynamically appends image preview cards here -->
+                    </div>
+                  </div>
+
+                  <div class="form-group" style="margin-top: 24px;">
+                    <label>Coordinate / Location Lock</label>
+                    <div style="display: flex; gap: 8px;">
+                      <button type="button" class="btn btn-secondary" onclick="alert('GPS Lock initialized:\nLatitude: 28.6139° N\nLongitude: 77.2090° E\nAccuracy: 4 meters')" style="flex: 1; padding: 10px; font-size: 13px;">
+                        <span class="material-icons-round" style="color: var(--danger-color)">my_location</span> GPS Locate
+                      </button>
+                      <button type="button" class="btn btn-secondary" onclick="alert('Select location point on Google Maps interface')" style="flex: 1; padding: 10px; font-size: 13px;">
+                        <span class="material-icons-round" style="color: var(--primary-color)">map</span> Pin Map
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <div style="display: flex; gap: 16px; margin-top: 32px; border-top: 1px solid var(--border-color); padding-top: 24px;">
+                <button type="submit" class="btn btn-danger" style="padding: 14px 40px; font-size: 16px;">
+                  Submit Emergency Alert
+                </button>
+                <button type="button" class="btn btn-secondary" data-target="citizen-dashboard">
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </section>
+
+
+        <!-- ================= PAGE 5: AI ANALYSIS SCREEN ================= -->
+        <section class="screen-container hidden-screen" id="ai-analysis-screen">
+          <div class="premium-card" style="max-width: 680px; margin: 0 auto;">
+            
+            <!-- Loading view with animated scan -->
+            <div id="ai-loading-view" class="ai-loading-overlay">
+              <div class="ai-scan-sphere">
+                <span class="material-icons-round">psychology</span>
+                <div class="ai-scan-bar"></div>
+              </div>
+              <h2 style="font-size: 24px; font-weight: 700; color: var(--primary-color)">AI Neural Parsing Engine Active</h2>
+              <p style="color: var(--text-secondary); max-width: 450px; font-size: 14px; margin-top: 8px;">Verifying incident authenticity, cross-matching duplicate logs, and identifying dispatch routing...</p>
+              
+              <!-- Console feed emulator -->
+              <div class="ai-console-feed" id="ai-console-feed">
+                <!-- Log feed lines loaded from JS -->
+              </div>
+            </div>
+
+            <!-- Complete AI Results presentation view -->
+            <div id="ai-analysis-results" style="display: none;">
+              <div style="text-align: center; margin-bottom: 24px;">
+                <span class="material-icons-round" style="font-size: 64px; color: var(--success-color)">verified</span>
+                <h2 style="font-size: 26px; font-weight: 700; margin-top: 10px;">Verification Verified (96.4% Match)</h2>
+                <p style="color: var(--text-secondary); font-size: 14px;">Incident has been categorized. Nearest emergency centers alerted.</p>
+              </div>
+
+              <div class="ai-results-grid">
+                <div class="ai-metric-box">
+                  <span class="ai-metric-label">Incident Type</span>
+                  <div class="ai-metric-value" id="ai-res-type">Road Accident</div>
+                </div>
+                <div class="ai-metric-box">
+                  <span class="ai-metric-label">Fraud Check Score</span>
+                  <div class="ai-metric-value" id="ai-res-confidence" style="color: var(--success-color);">96% Trustworthy</div>
+                </div>
+                <div class="ai-metric-box">
+                  <span class="ai-metric-label">Threat Severity</span>
+                  <div class="ai-metric-value" id="ai-res-severity">CRITICAL</div>
+                </div>
+                <div class="ai-metric-box">
+                  <span class="ai-metric-label">Estimated Response Time</span>
+                  <div class="ai-metric-value" id="ai-res-eta" style="color: var(--primary-color)">6 Minutes</div>
+                </div>
+              </div>
+
+              <div style="margin-top: 24px; background-color: var(--bg-primary); padding: 16px; border-radius: var(--border-radius-md);">
+                <h4 style="font-weight: 700; margin-bottom: 8px;">Recommended Dispatch Services</h4>
+                <ul id="ai-res-depts" style="font-size: 14px; padding-left: 20px; color: var(--text-secondary); line-height: 1.8;">
+                  <!-- Dynamically populated lists -->
+                </ul>
+              </div>
+
+              <div style="display: flex; gap: 16px; margin-top: 32px; border-top: 1px solid var(--border-color); padding-top: 20px;">
+                <button class="btn btn-primary" id="ai-btn-dispatch" style="flex: 1; padding: 12px;">
+                  Confirm & Dispatch Units
+                </button>
+                <button class="btn btn-secondary" id="ai-btn-cancel" style="flex: 1; padding: 12px;">
+                  Cancel Incident
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+
+        <!-- ================= PAGE 6: LIVE TRACKING PAGE ================= -->
+        <section class="screen-container hidden-screen" id="live-tracking-page">
+          <div class="premium-card">
+            
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 16px;">
+              <div>
+                <h2 style="font-size: 24px; font-weight: 700;">Live Dispatch Telemetry</h2>
+                <p style="color: var(--text-secondary); font-size: 14px;">Incident ID: <strong style="color: var(--primary-color);">INC-8891</strong> (Ambulance UP16-A220 Assigned)</p>
+              </div>
+              <div style="text-align: right;">
+                <span style="font-size: 13px; color: var(--text-secondary)">Estimated Arrival</span>
+                <h3 style="font-size: 24px; font-weight: 800; color: var(--danger-color);">5 Mins 42s</h3>
+              </div>
+            </div>
+
+            <!-- Stepper Timeline component -->
+            <div class="tracking-timeline">
+              <div class="timeline-step completed">
+                <div class="timeline-circle"><span class="material-icons-round">done</span></div>
+                <span class="timeline-text">Report Submitted</span>
+              </div>
+              <div class="timeline-step completed">
+                <div class="timeline-circle"><span class="material-icons-round">done</span></div>
+                <span class="timeline-text">AI Authenticated</span>
+              </div>
+              <div class="timeline-step completed">
+                <div class="timeline-circle"><span class="material-icons-round">done</span></div>
+                <span class="timeline-text">Units Dispatched</span>
+              </div>
+              <div class="timeline-step active">
+                <div class="timeline-circle"><span class="material-icons-round">local_shipping</span></div>
+                <span class="timeline-text">En Route</span>
+              </div>
+              <div class="timeline-step">
+                <div class="timeline-circle"><span class="material-icons-round">pin_drop</span></div>
+                <span class="timeline-text">Arrived</span>
+              </div>
+              <div class="timeline-step">
+                <div class="timeline-circle"><span class="material-icons-round">check_circle</span></div>
+                <span class="timeline-text">Resolved</span>
+              </div>
+            </div>
+
+            <!-- Double Column layout tracking -->
+            <div class="report-grid">
+              
+              <div>
+                <div class="maps-simulation-box" style="height: 380px;">
+                  <div class="map-toolbar">
+                    <span class="map-btn active"><span class="pulse-badge"></span> Telemetry Streaming Active</span>
+                  </div>
+                  <canvas id="tracking-live-map" class="live-map-canvas"></canvas>
+                </div>
+              </div>
+
+              <!-- Dispatch Team Metadata card -->
+              <div>
+                <div style="background-color: var(--bg-primary); padding: 20px; border-radius: var(--border-radius-lg); border: 1px solid var(--border-color);">
+                  <h4 style="font-weight: 700; margin-bottom: 16px;">Assigned Responders</h4>
+                  
+                  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+                    <div style="width: 48px; height: 48px; border-radius: 50%; background-color: var(--primary-light); display: flex; align-items: center; justify-content: center; color: var(--primary-color);">
+                      <span class="material-icons-round" style="font-size: 28px;">medical_services</span>
+                    </div>
+                    <div>
+                      <h4 style="font-weight: 700;">Paramedic Unit A220</h4>
+                      <p style="font-size: 12px; color: var(--text-secondary);">Civil Hospital Wing Sector 5</p>
+                    </div>
+                  </div>
+
+                  <div style="display: flex; flex-direction: column; gap: 10px; font-size: 13px; border-top: 1px solid var(--border-color); padding-top: 16px; margin-bottom: 20px;">
+                    <div style="display: flex; justify-content: space-between;">
+                      <span style="color: var(--text-secondary)">Crew Lead</span>
+                      <strong>Dr. Rajesh Mehta</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                      <span style="color: var(--text-secondary)">Vehicle Telemetry</span>
+                      <strong>Speed: 64 km/h (Active Siren)</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                      <span style="color: var(--text-secondary)">Emergency Medical Care</span>
+                      <strong>Blood Supply O+ Available</strong>
+                    </div>
+                  </div>
+
+                  <div style="display: flex; gap: 12px;">
+                    <button class="btn btn-primary" onclick="alert('Calling responder Lead Paramedic...')">
+                      <span class="material-icons-round">phone</span> Call Unit Lead
+                    </button>
+                    <button class="btn btn-secondary" onclick="alert('Emergency dispatcher notes:\n- Standard collision trauma protocols active.\n- Road clearance requested.')">
+                      Details
+                    </button>
+                  </div>
+                </div>
+
+                <div class="premium-card glow-danger" style="margin-top: 16px; padding: 16px;">
+                  <div style="display: flex; gap: 10px; align-items: center; color: var(--danger-color); font-weight: 700; font-size: 14px;">
+                    <span class="material-icons-round">info</span>
+                    <span>Trauma Broadcast Active</span>
+                  </div>
+                  <p style="font-size: 11px; color: var(--text-secondary); margin-top: 4px;">Nearby traffic is receiving automated alerts via Android Emergency Location services to yield priority route access.</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ================= PAGE 7: PREVENTION / HAZARD REPORT PAGE ================= -->
+        <section class="screen-container hidden-screen" id="hazard-report-page">
+          <div class="premium-card">
+            <h2 style="font-size: 24px; font-weight: 700; margin-bottom: 8px;">Hazard & Disaster Prevention Log</h2>
+            <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 24px;">Submit hazard vulnerabilities (e.g. open electrical wiring, damaged bridges) to prevent safety issues before they escalate.</p>
+
+            <div class="report-grid">
+              
+              <div>
+                <form id="hazard-report-form">
+                  <div class="form-group">
+                    <label for="hazard-type">Hazard Classification Type</label>
+                    <select id="hazard-type" class="form-input" style="width: 100%; height: 46px;" required>
+                      <option value="Broken Bridge">Broken Bridge Railing / Structural Damage</option>
+                      <option value="Open Electric Wire">Open High Tension Electrical Wire</option>
+                      <option value="Large Pothole">Large Potholes / Highway Cavities</option>
+                      <option value="Gas Leak">Gas Line Leakage (Odor / Vapor)</option>
+                      <option value="Unsafe Building">Unsafe Structural Collapse Hazard</option>
+                      <option value="Damaged Road">Severely Damaged Road Grid</option>
+                      <option value="Waterlogging">Major Storm Drain Clog / Waterlogging</option>
+                      <option value="Tree About to Fall">Uprooted Tree Leaning on Power Line</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="hazard-loc">Vulnerability Location Details</label>
+                    <input type="text" id="hazard-loc" class="form-input" placeholder="e.g. Outer Ring Road, Near Flyover pillar 88" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="hazard-severity">Infrastructure Severity Level</label>
+                    <select id="hazard-severity" class="form-input" style="width: 100%; height: 46px;">
+                      <option value="critical">Critical Vulnerability (High risk of imminent danger)</option>
+                      <option value="high">High Risk (Needs assessment within 24 hours)</option>
+                      <option value="medium">Medium Concern (Standard infrastructure repair log)</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="hazard-comments">Comments / Additional Safety Hazards</label>
+                    <textarea id="hazard-comments" class="form-input" rows="3" placeholder="Provide any additional comments..."></textarea>
+                  </div>
+
+                  <button type="submit" class="btn btn-primary" style="margin-top: 16px;">
+                    Submit Preventive Hazard Log
+                  </button>
+                </form>
+              </div>
+
+              <!-- List of active reported hazards nearby -->
+              <div>
+                <div style="background-color: var(--bg-primary); padding: 20px; border-radius: var(--border-radius-lg); border: 1px solid var(--border-color);">
+                  <h4 style="font-weight: 700; margin-bottom: 16px;">Active Reported Infrastructure Concerns</h4>
+                  
+                  <div style="display: flex; flex-direction: column; gap: 12px;">
+                    <div style="background-color: var(--bg-secondary); padding: 12px; border-radius: var(--border-radius-md); border: 1px solid var(--border-color); font-size: 13px;">
+                      <div style="display: flex; justify-content: space-between; font-weight: 700;">
+                        <span>Open High Tension Wire</span>
+                        <span class="severity-badge high" style="padding: 1px 6px;">HIGH</span>
+                      </div>
+                      <p style="color: var(--text-secondary); font-size: 11px; margin-top: 4px;">Location: Noida Sector 62. Reported 2 days ago.</p>
+                      <p style="color: var(--primary-color); font-weight: 600; font-size: 11px; margin-top: 4px;">Status: Assigned to DISCOM Wing</p>
+                    </div>
+
+                    <div style="background-color: var(--bg-secondary); padding: 12px; border-radius: var(--border-radius-md); border: 1px solid var(--border-color); font-size: 13px;">
+                      <div style="display: flex; justify-content: space-between; font-weight: 700;">
+                        <span>Yamuna Canal Railing</span>
+                        <span class="severity-badge critical" style="padding: 1px 6px;">CRITICAL</span>
+                      </div>
+                      <p style="color: var(--text-secondary); font-size: 11px; margin-top: 4px;">Location: Yamuna Expressway Bridge. Reported 1 day ago.</p>
+                      <p style="color: var(--success-color); font-weight: 600; font-size: 11px; margin-top: 4px;">Status: Inspection Scheduled</p>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ================= PAGE 8: EMERGENCY SOS PAGE ================= -->
+        <section class="screen-container hidden-screen" id="emergency-sos-page">
+          <div class="premium-card" style="max-width: 540px; margin: 0 auto;">
+            
+            <div class="sos-overlay">
+              <h2 style="font-size: 28px; font-weight: 800; color: var(--danger-color); font-family: var(--font-title); margin-bottom: 8px;">EMERGENCY BEACON ACTIVATED</h2>
+              <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 32px;">Broadcasting location vectors to national control rooms. Press CANCEL to stop trigger.</p>
+
+              <div class="sos-big-btn-container">
+                <div class="sos-outer-ring" style="animation-play-state: paused;"></div>
+                <div class="sos-outer-ring-2" style="animation-play-state: paused;"></div>
+                <div class="sos-big-btn" id="sos-trigger-btn">
+                  <span class="sos-label" id="sos-countdown-number">5</span>
+                  <span class="sos-sublabel">Seconds Left</span>
+                </div>
+              </div>
+
+              <div style="margin-top: 16px; text-align: center; width: 100%;">
+                <button class="btn btn-secondary" id="sos-cancel-btn" style="border-color: var(--danger-color); color: var(--danger-color); font-weight: 700; width: 100%; max-width: 240px;">
+                  Cancel SOS Beacon
+                </button>
+              </div>
+
+              <div style="margin-top: 40px; text-align: left; width: 100%; background-color: var(--bg-primary); padding: 16px; border-radius: var(--border-radius-md);">
+                <h4 style="font-weight: 700; margin-bottom: 8px;">Automatic Emergency Transmissions:</h4>
+                <ul style="font-size: 13px; color: var(--text-secondary); padding-left: 18px; line-height: 1.6;">
+                  <li>GPS Coordinates: Broadlocked</li>
+                  <li>Linked Contacts: Sent via SMS Gateways</li>
+                  <li>Medical ID: Transmitted to assigned ICU Paramedics</li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+
+        <!-- ================= PAGE 9: AUTHORITY CONTROL DASHBOARD ================= -->
+        <section class="screen-container hidden-screen" id="authority-dashboard">
+          
+          <!-- Department-specific warning advisory strip -->
+          <div id="authority-dept-alert" class="alert-strip" style="display: none; margin-bottom: 20px;">
+            <span class="material-icons-round alert-strip-icon">warning</span>
+            <div>
+              <h4 style="font-weight: 700; id='auth-alert-title'">Department Advisory Active</h4>
+              <p style="font-size: 12px; opacity: 0.9; id='auth-alert-desc'">Details</p>
+            </div>
+          </div>
+
+          <!-- Dispatch Statistics top bar -->
+          <div class="authority-analytics-strip">
+            <div class="premium-card" style="padding: 16px; text-align: center;">
+              <h3 id="auth-stat-time-val" style="font-size: 24px; font-weight: 800; color: var(--danger-color);">6.2 Min</h3>
+              <p id="auth-stat-time-lbl" style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase;">Average Response Time</p>
+            </div>
+            <div class="premium-card" style="padding: 16px; text-align: center;">
+              <h3 id="auth-stat-active-val" style="font-size: 24px; font-weight: 800; color: var(--warning-color);">3 Active</h3>
+              <p id="auth-stat-active-lbl" style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase;">Pending Dispatches</p>
+            </div>
+            <div class="premium-card" style="padding: 16px; text-align: center;">
+              <h3 id="auth-stat-avail-val" style="font-size: 24px; font-weight: 800; color: var(--success-color);">42 Units</h3>
+              <p id="auth-stat-avail-lbl" style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase;">Responders Available</p>
+            </div>
+            <div class="premium-card" style="padding: 16px; text-align: center;">
+              <h3 id="auth-stat-busy-val" style="font-size: 24px; font-weight: 800; color: var(--text-secondary);">18 Units</h3>
+              <p id="auth-stat-busy-lbl" style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase;">Responders Busy</p>
+            </div>
+          </div>
+
+          <!-- Live Operations split panel -->
+          <div class="authority-layout">
+            
+            <!-- Left Incident Feeds column -->
+            <div>
+              <div class="premium-card" style="height: 100%; display: flex; flex-direction: column; gap: 16px; padding: 16px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">
+                  <h3 style="font-size: 16px; font-weight: 700;">Incoming Dispatch Queue</h3>
+                  <span class="severity-badge critical" style="font-size: 10px;">Live Feed</span>
+                </div>
+
+                <!-- Feed item list -->
+                <div class="incident-sidebar-feed" id="authority-incident-feed">
+                  <!-- Load entries from JS -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Detail / Live Map View column -->
+            <div style="display: flex; flex-direction: column; gap: 24px;">
+              
+              <!-- Incident detail panel -->
+              <div class="premium-card" id="authority-incident-details">
+                <!-- Loaded dynamically on click from JS -->
+              </div>
+
+              <!-- Main Control Live tracking Map -->
+              <div class="premium-card">
+                <h3 style="font-weight: 700; margin-bottom: 12px;">National Emergency Dispatch Tracking Map</h3>
+                <div class="maps-simulation-box" style="height: 300px;">
+                  <canvas id="authority-live-map" class="live-map-canvas"></canvas>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </section>
+
+
+        <!-- ================= PAGE 11: RESOURCE MANAGEMENT ================= -->
+        <section class="screen-container hidden-screen" id="resource-management-page">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <div>
+              <h2 style="font-size: 24px; font-weight: 700;">National Resource Allocation Portal</h2>
+              <p style="color: var(--text-secondary); font-size: 14px;">Review and manage active ambulances, police forces, and NDRF teams.</p>
+            </div>
+            <button class="btn btn-primary" onclick="alert('Refreshed active telemetry database.')">
+              <span class="material-icons-round">sync</span> Refresh Resource Status
+            </button>
+          </div>
+
+          <div class="resources-grid" id="resource-cards-grid">
+            <!-- Populated dynamically by app.js -->
+          </div>
+
+          <div class="premium-card" style="margin-top: 24px;">
+            <h3 style="font-weight: 700; margin-bottom: 16px;">Regional Resource Allocation Map</h3>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+              <div style="background-color: var(--bg-primary); padding: 16px; border-radius: var(--border-radius-md); border: 1px solid var(--border-color);">
+                <h4 style="font-weight: 700; color: var(--primary-color)">Zone North (Delhi NCR)</h4>
+                <p style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">Available units: 82% capacity. No active disaster strain.</p>
+              </div>
+              <div style="background-color: var(--bg-primary); padding: 16px; border-radius: var(--border-radius-md); border: 1px solid var(--border-color);">
+                <h4 style="font-weight: 700; color: var(--danger-color)">Zone South (Chennai Wing)</h4>
+                <p style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">Available units: 35% capacity. Heavy strain due to flood monitoring.</p>
+              </div>
+              <div style="background-color: var(--bg-primary); padding: 16px; border-radius: var(--border-radius-md); border: 1px solid var(--border-color);">
+                <h4 style="font-weight: 700; color: var(--success-color)">Zone East (Assam Wing)</h4>
+                <p style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">Available units: 62% capacity. NDRF battalions fully deployed.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ================= PAGE 12: ANALYTICS PAGE ================= -->
+        <section class="screen-container hidden-screen" id="analytics-page">
+          <div style="margin-bottom: 8px;">
+            <h2 style="font-size: 24px; font-weight: 700;">Government Disaster Analytics & Trends</h2>
+            <p style="color: var(--text-secondary); font-size: 14px;">Historical trends, emergency distributions, and hotspot analysis maps.</p>
+          </div>
+
+          <div class="analytics-grid">
+            
+            <div class="premium-card">
+              <h3 style="font-weight: 700;">Daily Emergency Alert volume</h3>
+              <div class="chart-placeholder">
+                <canvas id="analytics-line-chart" style="width: 100%; height: 100%;"></canvas>
+              </div>
+            </div>
+
+            <div class="premium-card">
+              <h3 style="font-weight: 700;">Incidents by Category Classification</h3>
+              <div class="chart-placeholder">
+                <canvas id="analytics-bar-chart" style="width: 100%; height: 100%;"></canvas>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="premium-card" style="margin-top: 24px;">
+            <h3 style="font-weight: 700; margin-bottom: 16px;">National Disaster Heatmap (India Region)</h3>
+            <div class="india-heatmap-container">
+              <!-- Inline simulated Heatmap Graphics -->
+              <div style="text-align: center;">
+                <span class="material-icons-round" style="font-size: 72px; color: var(--danger-color); opacity: 0.85; animation: pulse-danger-anim 2s infinite;">map</span>
+                <h4 style="font-weight: 700; margin-top: 10px;">National Heatmap Overlay</h4>
+                <p style="font-size: 12px; color: var(--text-secondary); max-width: 400px; margin: 6px auto 0 auto;">Simulated satellite view showing heat maps of heavy road accidents (NCR region) and waterlogging events (East coast).</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ================= PAGE 13: ADMIN PANEL ================= -->
+        <section class="screen-container hidden-screen" id="admin-panel">
+          <div style="margin-bottom: 8px;">
+            <h2 style="font-size: 24px; font-weight: 700;">System Administrator Portal</h2>
+            <p style="color: var(--text-secondary); font-size: 14px;">Review system integrity logs, user credentials verification, and fraud detection levels.</p>
+          </div>
+
+          <div class="analytics-grid">
+            
+            <!-- System integrity logs box -->
+            <div class="premium-card">
+              <h3 style="font-weight: 700;">Real-time System Logs</h3>
+              <div class="system-logs-box" id="admin-logs-box">
+                <!-- Dynamically updated logs -->
+              </div>
+            </div>
+
+            <!-- Fraud check statistics -->
+            <div class="premium-card">
+              <h3 style="font-weight: 700; margin-bottom: 12px;">AI Fraud Flag Audit Queue</h3>
+              
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Report ID</th>
+                    <th>Citizen User</th>
+                    <th>Fraud Probability</th>
+                    <th>Action Link</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>INC-8114</td>
+                    <td>Rahul Sen</td>
+                    <td style="color: var(--danger-color); font-weight: 700;">88.2% (Spam)</td>
+                    <td><button class="btn btn-secondary" style="padding: 4px 8px; font-size: 11px;" onclick="alert('Incident marked as Fraud. Citizen user ID suspended.')">Block</button></td>
+                  </tr>
+                  <tr>
+                    <td>INC-8891</td>
+                    <td>Sumit Roy</td>
+                    <td style="color: var(--success-color); font-weight: 700;">3.6% (Verified)</td>
+                    <td><span style="font-size: 11px; font-weight: 600; color: var(--text-light)">N/A</span></td>
+                  </tr>
+                  <tr>
+                    <td>INC-8420</td>
+                    <td>Neha Gupta</td>
+                    <td style="color: var(--warning-color); font-weight: 700;">45.1% (Suspected)</td>
+                    <td><button class="btn btn-secondary" style="padding: 4px 8px; font-size: 11px;" onclick="alert('Requesting photo resubmission via SMS link.')">Audit</button></td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
+
+          </div>
+        </section>
+
+
+        <!-- ================= PAGE 14: PROFILE PAGE ================= -->
+        <section class="screen-container hidden-screen" id="profile-page">
+          <div class="premium-card" style="max-width: 680px; margin: 0 auto;">
+            <div style="display: flex; gap: 20px; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 24px; margin-bottom: 24px;">
+              <div style="width: 72px; height: 72px; border-radius: 50%; background-color: var(--primary-color); display: flex; align-items: center; justify-content: center; color: white; font-size: 28px; font-weight: 700;">
+                UK
+              </div>
+              <div>
+                <h2 style="font-size: 24px; font-weight: 700;">Umer Khan</h2>
+                <p style="color: var(--text-secondary); font-size: 14px;">Aadhaar Verified Citizen • +91 98765 43210</p>
+              </div>
+            </div>
+
+            <!-- Medical parameters cards -->
+            <h3 style="font-weight: 700; margin-bottom: 16px;">Verified Medical Information card</h3>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px;">
+              <div style="background-color: var(--bg-primary); padding: 16px; border-radius: var(--border-radius-md); text-align: center;">
+                <span style="font-size: 12px; color: var(--text-secondary)">Blood Group</span>
+                <div style="font-size: 24px; font-weight: 800; color: var(--danger-color); margin-top: 4px;">O+ (Positive)</div>
+              </div>
+              <div style="background-color: var(--bg-primary); padding: 16px; border-radius: var(--border-radius-md); text-align: center;">
+                <span style="font-size: 12px; color: var(--text-secondary)">Drug Allergies</span>
+                <div style="font-size: 16px; font-weight: 700; margin-top: 8px;">Penicillin, Sulfa</div>
+              </div>
+              <div style="background-color: var(--bg-primary); padding: 16px; border-radius: var(--border-radius-md); text-align: center;">
+                <span style="font-size: 12px; color: var(--text-secondary)">Emergency Contact</span>
+                <div style="font-size: 13px; font-weight: 700; margin-top: 8px;">Father (+91 ***99)</div>
+              </div>
+            </div>
+
+            <!-- Profile parameters lists -->
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              <div class="settings-option">
+                <div class="settings-meta">
+                  <span class="settings-title">Primary Communication Language</span>
+                  <span class="settings-desc">Used for speech translation in dispatcher calls.</span>
+                </div>
+                <select class="form-input" style="height: 38px;">
+                  <option>English</option>
+                  <option>Hindi (हिन्दी)</option>
+                  <option>Tamil (தமிழ்)</option>
+                  <option>Telugu (తెలుగు)</option>
+                </select>
+              </div>
+
+              <div class="settings-option">
+                <div class="settings-meta">
+                  <span class="settings-title">Dark Mode Theme Toggle</span>
+                  <span class="settings-desc">Switch interface styles for easier night readability.</span>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" id="theme-toggle">
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+
+        <!-- ================= PAGE 15: SETTINGS PAGE ================= -->
+        <section class="screen-container hidden-screen" id="settings-page">
+          <div class="premium-card" style="max-width: 680px; margin: 0 auto;">
+            <h2 style="font-size: 24px; font-weight: 700; border-bottom: 1px solid var(--border-color); padding-bottom: 16px; margin-bottom: 20px;">System Preferences & Safety Rules</h2>
+            
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              
+              <div class="settings-option">
+                <div class="settings-meta">
+                  <span class="settings-title">Continuous Location tracking</span>
+                  <span class="settings-desc">Broadcasting user coordinates to control centers during an active SOS.</span>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" checked onclick="alert('GPS Continuous track parameters updated.')">
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <div class="settings-option">
+                <div class="settings-meta">
+                  <span class="settings-title">Severe Weather Warning alerts</span>
+                  <span class="settings-desc">Enable localized warning push alerts from meteorological feeds.</span>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" checked>
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <div class="settings-option">
+                <div class="settings-meta">
+                  <span class="settings-title">Audio / Video Capture Permission</span>
+                  <span class="settings-desc">Allow camera and sound captures for emergency verification checks.</span>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" checked>
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <div class="settings-option">
+                <div class="settings-meta">
+                  <span class="settings-title">Integrate Android crash sensors</span>
+                  <span class="settings-desc">Automatically trigger SOS sequence upon high velocity impact signatures.</span>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" onclick="alert('Android Sensor crash logs enabled.')">
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- GOVERNMENT-STYLE FOOTER -->
+        <footer class="gov-footer">
+          <div class="footer-content">
+            <div class="footer-brand">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span class="material-icons-round" style="color: var(--primary-color)">emergency</span>
+                <span style="font-weight: 800; font-size: 16px;">NSERS HUB</span>
+              </div>
+              <p style="font-size: 12px; color: var(--text-secondary); line-height: 1.6;">A joint safety initiative by the Ministry of Electronics and Information Technology (MeitY) and the National Disaster Management Authority (NDMA) in technical partnership with Google India.</p>
+            </div>
+            <div>
+              <h4 style="font-weight: 700; margin-bottom: 12px;">Quick Directories</h4>
+              <ul class="footer-links">
+                <li><a href="#" data-target="landing-page">National Portal Home</a></li>
+                <li><a href="#" onclick="alert('Loading relief camps database directory...')">Relief Camp Locator</a></li>
+                <li><a href="#" onclick="alert('Loading NDMA safety manuals and advisory PDFs...')">NDMA Safety Guidelines</a></li>
+              </ul>
+            </div>
+            <div class="footer-contacts">
+              <h4 style="font-weight: 700;">Emergency Helplines</h4>
+              <div class="contact-pill"><span class="material-icons-round">phone</span> National Emergency: 112</div>
+              <div class="contact-pill"><span class="material-icons-round">phone</span> Disaster Management: 1078</div>
+            </div>
+          </div>
+          <div class="footer-bottom">
+            © 2026 National Smart Emergency Response System (NSERS) portal, Government of India. Developed under Material Design rules.
+          </div>
+        </footer>
+
+      </main>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
