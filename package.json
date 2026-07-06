@@ -1,0 +1,16 @@
+{
+  "name": "nsers-emergency-response-system",
+  "version": "1.0.0",
+  "description": "National Smart Emergency Response System High-Fidelity Prototype",
+  "main": "app.js",
+  "scripts": {
+    "build": "echo 'Static assets ready. Build complete.'"
+  },
+  "keywords": [
+    "nsers",
+    "emergency",
+    "government"
+  ],
+  "author": "Umer Khan",
+  "license": "ISC"
+}
