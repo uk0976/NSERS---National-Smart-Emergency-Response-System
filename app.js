@@ -986,7 +986,7 @@ window.rejectOperatorIncident = (id) => {
 };
 
 function setupLiveTrackingView() {
-  const latestIncident = state.incidents[state.incidents.length - 1];
+  const latestIncident = state.incidents[0];
   
   const idEl = document.getElementById('tracking-incident-id');
   const unitEl = document.getElementById('tracking-assigned-unit');
