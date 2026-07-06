@@ -287,7 +287,7 @@ function navigateTo(screenId) {
     renderAuthorityFeed();
     startTrackingMap('authority-live-map');
   } else if (screenId === 'live-tracking-page') {
-    startTrackingMap('tracking-live-map', true); // animated vehicle dispatch
+    setupLiveTrackingView();
   } else if (screenId === 'citizen-dashboard') {
     startTrackingMap('citizen-live-map');
   } else if (screenId === 'landing-page') {
@@ -577,8 +577,9 @@ function runAIAnalyzer(incident) {
       const cancelBtn = document.getElementById('ai-btn-cancel');
 
       dispatchBtn.onclick = () => {
-        incident.status = 'Verified';
-        logSystem(`Incident ${incident.id} verified. Tracking active.`);
+        incident.status = 'Awaiting Dispatch';
+        incident.assignedUnit = 'Pending Dispatch Approval';
+        logSystem(`Incident ${incident.id} marked as Awaiting Dispatch.`);
         navigateTo('live-tracking-page');
       };
 
@@ -969,6 +970,9 @@ window.dispatchOperatorIncident = (id) => {
     logSystem(`Operator Dispatch approved for: ${id}`);
     renderAuthorityFeed();
     alert(`Resource dispatch orders transmitted for incident ${id}`);
+    if (state.currentScreen === 'live-tracking-page') {
+      setupLiveTrackingView();
+    }
   }
 };
 window.rejectOperatorIncident = (id) => {
@@ -980,6 +984,135 @@ window.rejectOperatorIncident = (id) => {
     alert(`Incident ${id} flag updated to FRAUD.`);
   }
 };
+
+function setupLiveTrackingView() {
+  const latestIncident = state.incidents[state.incidents.length - 1];
+  
+  const idEl = document.getElementById('tracking-incident-id');
+  const unitEl = document.getElementById('tracking-assigned-unit');
+  const etaEl = document.getElementById('tracking-eta-val');
+  const alertEl = document.getElementById('dispatch-simulation-alert');
+  const stepperEl = document.getElementById('tracking-timeline-stepper');
+  
+  if (!latestIncident) return;
+  
+  if (idEl) idEl.textContent = latestIncident.id;
+  
+  const isAwaitingDispatch = (latestIncident.status === 'New' || latestIncident.status === 'Awaiting Dispatch' || latestIncident.status === 'Submitted');
+  
+  if (isAwaitingDispatch) {
+    if (unitEl) unitEl.textContent = "Awaiting Dispatch Approval";
+    if (etaEl) {
+      etaEl.textContent = "PENDING";
+      etaEl.style.color = "var(--warning-color)";
+    }
+    
+    if (stepperEl) {
+      stepperEl.innerHTML = `
+        <div class="timeline-step completed">
+          <div class="timeline-circle"><span class="material-icons-round">done</span></div>
+          <span class="timeline-text">Report Submitted</span>
+        </div>
+        <div class="timeline-step completed">
+          <div class="timeline-circle"><span class="material-icons-round">done</span></div>
+          <span class="timeline-text">AI Authenticated</span>
+        </div>
+        <div class="timeline-step active">
+          <div class="timeline-circle"><span class="material-icons-round">pending_actions</span></div>
+          <span class="timeline-text">Awaiting Approval</span>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-circle"><span class="material-icons-round">local_shipping</span></div>
+          <span class="timeline-text">En Route</span>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-circle"><span class="material-icons-round">pin_drop</span></div>
+          <span class="timeline-text">Arrived</span>
+        </div>
+      `;
+    }
+    
+    if (alertEl) {
+      alertEl.innerHTML = `
+        <div class="alert-info animate-pulse" style="background-color: var(--warning-light); color: #B06000; padding: 12px 16px; border-radius: var(--border-radius-md); font-size: 13px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(251,188,5,0.25); flex-wrap: wrap; gap: 8px;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="material-icons-round" style="color: #C28000; animation: statusPulse 1s infinite alternate; font-size: 18px;">pending_actions</span>
+            <span>Awaiting Operator Dispatch Approval...</span>
+          </div>
+          <div style="font-size: 11px; font-weight: 700; background-color: rgba(251,188,5,0.15); padding: 4px 8px; border-radius: 4px;">
+            ℹ️ Switch Role to Operator or Ambulance to approve, or wait 10s
+          </div>
+        </div>
+      `;
+    }
+    
+    startTrackingMap('tracking-live-map', false);
+    
+    if (!latestIncident.autoDispatchTimer) {
+      latestIncident.autoDispatchTimer = setTimeout(() => {
+        if (latestIncident.status === 'New' || latestIncident.status === 'Awaiting Dispatch' || latestIncident.status === 'Submitted') {
+          latestIncident.status = 'En Route';
+          latestIncident.assignedUnit = 'Ambulance Unit G-5 dispatched (Auto-Command)';
+          logSystem(`Simulated Auto-Dispatch approved for: ${latestIncident.id}`);
+          if (state.currentScreen === 'live-tracking-page') {
+            setupLiveTrackingView();
+          }
+        }
+      }, 10000);
+    }
+    
+  } else {
+    if (unitEl) unitEl.textContent = latestIncident.assignedUnit || "Ambulance Unit G-5 Assigned";
+    if (etaEl) {
+      etaEl.textContent = "5 Mins 42s";
+      etaEl.style.color = "var(--danger-color)";
+    }
+    
+    if (stepperEl) {
+      stepperEl.innerHTML = `
+        <div class="timeline-step completed">
+          <div class="timeline-circle"><span class="material-icons-round">done</span></div>
+          <span class="timeline-text">Report Submitted</span>
+        </div>
+        <div class="timeline-step completed">
+          <div class="timeline-circle"><span class="material-icons-round">done</span></div>
+          <span class="timeline-text">AI Authenticated</span>
+        </div>
+        <div class="timeline-step completed">
+          <div class="timeline-circle"><span class="material-icons-round">done</span></div>
+          <span class="timeline-text">Approved & Dispatched</span>
+        </div>
+        <div class="timeline-step active">
+          <div class="timeline-circle"><span class="material-icons-round">local_shipping</span></div>
+          <span class="timeline-text">En Route</span>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-circle"><span class="material-icons-round">pin_drop</span></div>
+          <span class="timeline-text">Arrived</span>
+        </div>
+      `;
+    }
+    
+    if (alertEl) {
+      alertEl.innerHTML = `
+        <div class="alert-info" style="background-color: var(--success-light); color: var(--success-color); padding: 12px 16px; border-radius: var(--border-radius-md); font-size: 13px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(52, 168, 83, 0.2); flex-wrap: wrap; gap: 8px;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="material-icons-round" style="font-size: 18px;">check_circle</span>
+            <span>RESPONDERS DISPATCHED & EN ROUTE</span>
+          </div>
+          <div style="font-size: 11px; font-weight: 700; background-color: rgba(52, 168, 83, 0.15); padding: 4px 8px; border-radius: 4px;">
+            Live Location Active
+          </div>
+        </div>
+      `;
+      
+      playBeep(450, 0.1, 'sine');
+      setTimeout(() => playBeep(350, 0.15, 'sine'), 100);
+    }
+    
+    startTrackingMap('tracking-live-map', true);
+  }
+}
 
 // Map simulation engine using HTML5 canvas
 const mapIntervals = {};
@@ -1463,3 +1596,4 @@ window.toggleAudioRecording = toggleAudioRecording;
 window.stopAudioRecording = stopAudioRecording;
 window.deleteAudioRecording = deleteAudioRecording;
 window.toggleMobileSidebar = toggleMobileSidebar;
+window.setupLiveTrackingView = setupLiveTrackingView;

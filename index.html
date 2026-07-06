@@ -773,16 +773,19 @@
             <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 16px;">
               <div>
                 <h2 style="font-size: 24px; font-weight: 700;">Live Dispatch Telemetry</h2>
-                <p style="color: var(--text-secondary); font-size: 14px;">Incident ID: <strong style="color: var(--primary-color);">INC-8891</strong> (Ambulance UP16-A220 Assigned)</p>
+                <p style="color: var(--text-secondary); font-size: 14px;">Incident ID: <strong id="tracking-incident-id" style="color: var(--primary-color);">INC-8891</strong> (<span id="tracking-assigned-unit">Ambulance UP16-A220 Assigned</span>)</p>
               </div>
               <div style="text-align: right;">
                 <span style="font-size: 13px; color: var(--text-secondary)">Estimated Arrival</span>
-                <h3 style="font-size: 24px; font-weight: 800; color: var(--danger-color);">5 Mins 42s</h3>
+                <h3 id="tracking-eta-val" style="font-size: 24px; font-weight: 800; color: var(--danger-color);">5 Mins 42s</h3>
               </div>
             </div>
 
+            <!-- Dynamic Dispatch Status Banner -->
+            <div id="dispatch-simulation-alert" style="margin-top: 16px;"></div>
+
             <!-- Stepper Timeline component -->
-            <div class="tracking-timeline">
+            <div class="tracking-timeline" id="tracking-timeline-stepper">
               <div class="timeline-step completed">
                 <div class="timeline-circle"><span class="material-icons-round">done</span></div>
                 <span class="timeline-text">Report Submitted</span>
