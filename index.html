@@ -13,6 +13,9 @@
     <!-- TOP NAVIGATION BAR -->
     <header class="top-nav">
       <div class="brand-section">
+        <button class="nav-btn mobile-menu-btn" id="mobile-menu-trigger" onclick="toggleMobileSidebar(event)" style="display: none; margin-right: 8px;">
+          <span class="material-icons-round">menu</span>
+        </button>
         <div class="brand-logo">
           <span class="material-icons-round">emergency</span>
         </div>
@@ -50,6 +53,9 @@
     </header>
 
     <div class="main-wrapper">
+      
+      <!-- Mobile sidebar backdrop overlay -->
+      <div id="sidebar-backdrop" class="sidebar-backdrop" onclick="toggleMobileSidebar(event)"></div>
       
       <!-- SIDEBAR NAVIGATION MENU -->
       <aside class="sidebar" id="app-sidebar">

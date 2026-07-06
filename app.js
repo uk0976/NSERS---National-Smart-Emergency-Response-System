@@ -252,6 +252,16 @@ function navigateTo(screenId) {
   const screens = document.querySelectorAll('.screen-container');
   screens.forEach(s => s.classList.add('hidden-screen'));
   
+  // Auto-close mobile sidebar and backdrop if open
+  const sidebar = document.getElementById('app-sidebar');
+  const backdrop = document.getElementById('sidebar-backdrop');
+  if (sidebar) {
+    sidebar.classList.remove('mobile-open');
+  }
+  if (backdrop) {
+    backdrop.classList.remove('active');
+  }
+  
   // Show target screen
   const targetScreen = document.getElementById(screenId);
   if (targetScreen) {
@@ -1430,9 +1440,26 @@ function deleteAudioRecording() {
   }
 }
 
+function toggleMobileSidebar(event) {
+  if (event) {
+    event.stopPropagation();
+  }
+  const sidebar = document.getElementById('app-sidebar');
+  const backdrop = document.getElementById('sidebar-backdrop');
+  if (sidebar && backdrop) {
+    const isOpen = sidebar.classList.toggle('mobile-open');
+    if (isOpen) {
+      backdrop.classList.add('active');
+    } else {
+      backdrop.classList.remove('active');
+    }
+  }
+}
+
 // Global scope bindings
 window.switchRole = switchRole;
 window.navigateTo = navigateTo;
 window.toggleAudioRecording = toggleAudioRecording;
 window.stopAudioRecording = stopAudioRecording;
 window.deleteAudioRecording = deleteAudioRecording;
+window.toggleMobileSidebar = toggleMobileSidebar;
