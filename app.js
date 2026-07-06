@@ -578,12 +578,12 @@ function runAIAnalyzer(incident) {
 
       dispatchBtn.onclick = () => {
         incident.status = 'Verified';
-        logSystem(`Incident ${incident.id} verified & units dispatched.`);
+        logSystem(`Incident ${incident.id} verified. Tracking active.`);
         navigateTo('live-tracking-page');
       };
 
       cancelBtn.onclick = () => {
-        logSystem(`Incident ${incident.id} analysis cancelled.`);
+        logSystem(`Incident ${incident.id} request cancelled by user.`);
         navigateTo('citizen-dashboard');
       };
     }
